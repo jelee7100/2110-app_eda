@@ -196,6 +196,7 @@ class Logout:
 # ---------------------
 # EDA 페이지 클래스
 # ---------------------
+
 class EDA:
     def __init__(self):
         st.title("📊 Population Trends EDA")
@@ -205,7 +206,8 @@ class EDA:
             st.info("Please upload population_trends.csv file")
             return
 
-        df = pd.read_csv(uploaded_file)
+        file_bytes = uploaded_file.getvalue()
+        df = pd.read_csv(io.BytesIO(file_bytes))
         df.replace('-', 0, inplace=True)
         df[['인구', '출생아수(명)', '사망자수(명)']] = df[['인구', '출생아수(명)', '사망자수(명)']].apply(
             pd.to_numeric, errors='coerce').fillna(0).astype(int)
@@ -233,7 +235,7 @@ class EDA:
 
         with tabs[1]:
             st.header("📈 Yearly Population Trend (Nationwide)")
-            nat = pd.read_csv(uploaded_file)
+            nat = pd.read_csv(io.BytesIO(file_bytes))
             nat.replace('-', 0, inplace=True)
             nat[['인구', '출생아수(명)', '사망자수(명)']] = nat[['인구', '출생아수(명)', '사망자수(명)']].apply(pd.to_numeric, errors='coerce').fillna(0).astype(int)
             national = nat[nat['지역'] == '전국'].copy().sort_values('연도')
