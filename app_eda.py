@@ -224,7 +224,7 @@ class EDA:
         }
         df['region_en'] = df['지역'].map(region_en)
 
-        tabs = st.tabs(["📌 Basic Stats", "📈 Yearly Trend", "🏙️ Regional Analysis", "🔄 Change Analysis", "🗺️ Visualization"])
+        tabs = st.tabs(["📌 기초통계", "📈 연도별 추이", "🏙️ 지역별 분석", "🔄 변화량 분석", "🗺️ 시각화"])
 
         with tabs[0]:
             st.header("📌 Basic Statistics")
